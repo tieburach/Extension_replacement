@@ -28,6 +28,27 @@
 
 }
 
-#browseButton{
-    -fx-fill: BLUE;
+.label{
+    -fx-font-family: sans-serif;
+}
+
+.title {
+    -fx-font-size: 26px;
+    -fx-text-fill: #4d2800;
+    -fx-effect: dropshadow(gaussian, #4d2800, 1, 0.0, 1, 1);
+    -fx-animated: true;
+}
+
+.opis {
+    -fx-font-size: 18px;
+    -fx-text-fill: #331a00;
+}
+.root{
+    -fx-background-color: white;
+}
+
+.pola {
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #9d4024;
 }

@@ -5,7 +5,7 @@ import java.util.*;
 
 class ReplacingInputStream extends FilterInputStream {
 
-    int howManyChanges = 0;
+    private static int howManyChanges = 0;
 
     private LinkedList<Integer> inQueue = new LinkedList<>();
     private LinkedList<Integer> outQueue = new LinkedList<>();
@@ -46,10 +46,15 @@ class ReplacingInputStream extends FilterInputStream {
 
                 for (byte b : replacement)
                     outQueue.offer((int) b);
+                howManyChanges++;
             } else
                 outQueue.add(inQueue.remove());
         }
 
         return outQueue.remove();
+    }
+
+    public static int getHowMany() {
+        return howManyChanges;
     }
 }

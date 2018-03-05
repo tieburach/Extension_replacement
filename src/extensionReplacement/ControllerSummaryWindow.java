@@ -1,6 +1,5 @@
 package extensionReplacement;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,16 +14,28 @@ public class ControllerSummaryWindow {
     public Label description;
     public Label directory;
 
-    public void finishSummary(ActionEvent actionEvent) {
+    private int howManyF = ControllerMainWindow.getHowManyFiles();
+    private int howManyC = ControllerMainWindow.getHowManyChanges();
+
+    public void finishSummary() {
+        ControllerMainWindow.getSummaryStage().close();
     }
     @FXML
     void initialize(){
-        directory.setText("Przeszukiwany folder: " + ControllerMainWindow.getDirectorySelected());
-        howManyFiles.setText("Ile plików z rozszerzeniem .)"+ControllerMainWindow.getExtension());
-        howManyFilesNumber.setText(" " + ControllerMainWindow.getHowManyFiles());
-        howManyChangesNumber.setText(" " + ControllerMainWindow.getHowManyChanges());
-        description.setText("Po inicjazacji");
-        howManyChanges.setText("Po inicjalizacji");
-        howManyFiles.setText("Po inicjalizacji");
+        directory.setText("Przeszukiwany folder: ");
+        howManyFiles.setText("Ile plików z rozszerzeniem .");
+        howManyFilesNumber.setText(" " + howManyF);
+        howManyChangesNumber.setText(" " + howManyC);
+        if (howManyF==0){
+            description.setText("Nie znaleziono żadnych plików o podanym rozszerzeniu.");
+        }
+        else if (howManyC==0){
+            description.setText("W plikach nie znaleziono wystąpienia ciągu bajtów do zamiany.");
+        }
+        else {
+            description.setText("Wykonano zamianę w plikach.");
+        }
+        howManyChanges.setText("Ile plków zostało znalezionych");
+        howManyFiles.setText("Ile zostało wykonanych podmian");
     }
 }

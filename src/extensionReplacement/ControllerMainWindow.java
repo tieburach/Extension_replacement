@@ -1,41 +1,44 @@
 package extensionReplacement;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Objects;
 
 public class ControllerMainWindow {
 
+    private static Stage summaryStage;
+
+    public static Stage getSummaryStage(){
+        return summaryStage;
+    }
+
     @FXML
-    private static TextField directorySelected;
+    public Label howToUse;
+    public Label title;
+    public TextField directorySelected;
     public TextField bytesAfter;
     public Button browseButton;
     public Button submitButton;
-    public static TextField extensionForSearch;
+    public TextField extensionForSearch;
     public TextField bytesBefore;
     private File selectedDirectory;
     private static int howManyFiles = 0;
     private static int howManyChanges = 0;
 
 
-    public static String getDirectorySelected() {
-        return directorySelected.toString();
-    }
-
-    public static String getExtension(){
-        return extensionForSearch.toString();
-    }
-
-    public static int getHowManyFiles() {
+    static int getHowManyFiles() {
         return howManyFiles;
     }
 
-    public static int getHowManyChanges() {
+    static int getHowManyChanges() {
         return howManyChanges;
     }
 
@@ -43,11 +46,18 @@ public class ControllerMainWindow {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Choose a folder:");
         selectedDirectory = directoryChooser.showDialog(Main.getPrimaryStage());
-        directorySelected.setText(" Twoj folder to " + selectedDirectory);
+        directorySelected.setText(" " + selectedDirectory);
     }
 
     public void submitAction() throws IOException {
-
+        if (selectedDirectory==null || Objects.equals(bytesBefore.getText(), "") || Objects.equals(extensionForSearch.getText(), "")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText("Nie wypełniłeś wszystkich pól");
+            alert.setContentText("Proszę, wypełnij wszystkie pola jeżeli chcesz kontynuować");
+            alert.showAndWait();
+        }
+        else {
         Filter filter = new Filter();
         filter.finder(selectedDirectory, extensionForSearch.getText());
         howManyFiles = filter.fileList.size();
@@ -64,16 +74,18 @@ public class ControllerMainWindow {
             bos.close();
             ris.close();
             bis.close();
+            howManyChanges = ReplacingInputStream.getHowMany();
             FileWriter fileWriter = new FileWriter(o.getAbsolutePath(), bos.toByteArray());
             fileWriter.write();
         }
 
-        Stage summaryStage = new Stage();
+        summaryStage = new Stage();
         SummaryWindow summaryWindow = new SummaryWindow();
         try {
             summaryWindow.start(summaryStage);
         } catch (Exception e) {
             e.printStackTrace();
+        }
         }
     }
 }

@@ -11,7 +11,7 @@
         <Label fx:id="howManyChanges" layoutX="33.0" layoutY="119.0" text="Ile dokonano podmian" />
         <Button fx:id="finishButton" layoutX="146.0" layoutY="236.0" mnemonicParsing="false" onAction="#finishSummary" text="Zakończ" />
         <Label fx:id="howManyFilesNumber" layoutX="359.0" layoutY="69.0" text="0" />
-        <Label fx:id="howManyChangesNumber" layoutX="359.0" layoutY="119.0" text="0" />
+        <Label fx:id="howManyChangesNumber" layoutX="359.0" layoutY="119.0" text="0" styleClass="KLASA"/>
         <Label fx:id="description" layoutX="168.0" layoutY="168.0" text="Opis" />
       <Label fx:id="directory" layoutX="33.0" layoutY="31.0" text="Label" />
     </Pane>

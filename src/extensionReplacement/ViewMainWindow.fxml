@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="extensionReplacement.ControllerMainWindow">
-    <children>
-        <Pane prefHeight="600.0" prefWidth="600.0">
-            <Label layoutX="282.0" layoutY="63.0" text="TYTUL APLIKACJI"/>
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="extensionReplacement.ControllerMainWindow">
+    <Pane prefHeight="600.0" prefWidth="600.0">
+        <Label fx:id="title" layoutX="14.0" layoutY="43.0" prefHeight="70" prefWidth="550" styleClass="title" text="Aplikacja do zamiany danych w plikach o podanym rozszerzeniu" textAlignment="CENTER" wrapText="true" />
 
-            <Button fx:id="browseButton" layoutX="456.0" layoutY="252.0" mnemonicParsing="false"
-                    onAction="#browseDirectoryAction" text="Browse ..." id="browseButton"/>
-            <Button fx:id="submitButton" layoutX="266.0" layoutY="528.0" mnemonicParsing="false"
-                    onAction="#submitAction"
-                    text="Submit"/>
+        <Button id="browseButton" fx:id="browseButton" layoutX="439.0" layoutY="239.0" mnemonicParsing="false" onAction="#browseDirectoryAction" text="Browse" />
+        <Button fx:id="submitButton" layoutX="266.0" layoutY="528.0" mnemonicParsing="false" onAction="#submitAction" text="Submit" />
 
-            <TextField fx:id="extensionForSearch" layoutX="207.0" layoutY="322.0"/>
-            <Label layoutX="207.0" layoutY="231.0" text="Folder przeszukiwany"/>
+        <TextField fx:id="extensionForSearch" layoutX="210.0" layoutY="322.0" styleClass="pola" />
+        <Label layoutX="207.0" layoutY="231.0" text="Folder przeszukiwany" />
 
-            <TextField fx:id="directorySelected" layoutX="206.0" layoutY="252.0"/>
-            <Label layoutX="207.0" layoutY="300.0" text="Rozszerzenie plików"/>
+        <TextField fx:id="directorySelected" layoutX="210.0" layoutY="252.0" prefHeight="31.0" prefWidth="186.0" styleClass="pola" />
+        <Label layoutX="207.0" layoutY="300.0" text="Rozszerzenie plików" />
 
-            <TextField fx:id="bytesBefore" layoutX="206.0" layoutY="383.0"/>
-            <Label layoutX="207.0" layoutY="362.0" text="Ciąg znaków do zamiany"/>
+        <TextField fx:id="bytesBefore" layoutX="210.0" layoutY="383.0" styleClass="pola" />
+        <Label layoutX="207.0" layoutY="362.0" text="Ciąg znaków do zamiany" />
 
-            <Label layoutX="207.0" layoutY="430.0" text="Ciąg znaków na co zamieniać"/>
-            <TextField fx:id="bytesAfter" layoutX="206.0" layoutY="451.0"/>
-        </Pane>
-    </children>
+        <Label layoutX="207.0" layoutY="430.0" text="Ciąg znaków na co zamieniać" />
+        <TextField fx:id="bytesAfter" layoutX="210.0" layoutY="451.0" styleClass="pola" />
+
+        <Label fx:id="howToUse" layoutX="14.0" layoutY="116.0" prefHeight="98.0" prefWidth="568.0" styleClass="opis" text="Aplikacja przeszukuje folder wybrany przez użytkownika aby znaleźć pliki o podanym rozszerzeniu, następnie otwiera te pliki i wykonuję podmianę ciągów plików." textAlignment="CENTER" wrapText="true" />
+    </Pane>
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
 </GridPane>
