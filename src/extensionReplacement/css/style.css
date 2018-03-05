@@ -27,3 +27,7 @@
     -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
 
 }
+
+#browseButton{
+    -fx-fill: BLUE;
+}
