@@ -54,7 +54,7 @@ class ReplacingInputStream extends FilterInputStream {
         return outQueue.remove();
     }
 
-    public static int getHowMany() {
+    static int getHowMany() {
         return howManyChanges;
     }
 }

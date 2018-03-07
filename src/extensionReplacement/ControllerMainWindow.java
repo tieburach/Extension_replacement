@@ -16,7 +16,7 @@ public class ControllerMainWindow {
 
     private static Stage summaryStage;
 
-    public static Stage getSummaryStage(){
+    static Stage getSummaryStage(){
         return summaryStage;
     }
 
@@ -32,7 +32,25 @@ public class ControllerMainWindow {
     private File selectedDirectory;
     private static int howManyFiles = 0;
     private static int howManyChanges = 0;
+    private static String extension = "";
+    private static String directory = "";
 
+    static String getExtension() {
+        return extension;
+    }
+
+    static String getDirectory() {
+        return directory;
+    }
+
+
+    private void clearTextFields(){
+        directorySelected.setText("");
+        bytesBefore.setText("");
+        bytesAfter.setText("");
+        extensionForSearch.setText("");
+
+    }
 
     static int getHowManyFiles() {
         return howManyFiles;
@@ -61,6 +79,8 @@ public class ControllerMainWindow {
         Filter filter = new Filter();
         filter.finder(selectedDirectory, extensionForSearch.getText());
         howManyFiles = filter.fileList.size();
+        extension = extensionForSearch.getText();
+        directory = selectedDirectory.toString();
 
         for (File o : filter.fileList) {
             byte[] bytes = Files.readAllBytes(new File(o.getAbsolutePath()).toPath());
@@ -78,7 +98,7 @@ public class ControllerMainWindow {
             FileWriter fileWriter = new FileWriter(o.getAbsolutePath(), bos.toByteArray());
             fileWriter.write();
         }
-
+        clearTextFields();
         summaryStage = new Stage();
         SummaryWindow summaryWindow = new SummaryWindow();
         try {

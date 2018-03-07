@@ -13,6 +13,7 @@ public class ControllerSummaryWindow {
     public Label howManyChangesNumber;
     public Label description;
     public Label directory;
+    public Label extension;
 
     private int howManyF = ControllerMainWindow.getHowManyFiles();
     private int howManyC = ControllerMainWindow.getHowManyChanges();
@@ -22,8 +23,8 @@ public class ControllerSummaryWindow {
     }
     @FXML
     void initialize(){
-        directory.setText("Przeszukiwany folder: ");
-        howManyFiles.setText("Ile plików z rozszerzeniem .");
+        directory.setText("Folder: " +ControllerMainWindow.getDirectory());
+        extension.setText("Zadane rozszerzenie: ."+ControllerMainWindow.getExtension());
         howManyFilesNumber.setText(" " + howManyF);
         howManyChangesNumber.setText(" " + howManyC);
         if (howManyF==0){
@@ -35,7 +36,7 @@ public class ControllerSummaryWindow {
         else {
             description.setText("Wykonano zamianę w plikach.");
         }
-        howManyChanges.setText("Ile plków zostało znalezionych");
+        howManyChanges.setText("Ile plików zostało znalezionych:");
         howManyFiles.setText("Ile zostało wykonanych podmian");
     }
 }
