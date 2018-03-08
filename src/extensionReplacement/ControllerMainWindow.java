@@ -1,10 +1,7 @@
 package extensionReplacement;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -15,6 +12,7 @@ import java.util.Objects;
 public class ControllerMainWindow {
 
     private static Stage summaryStage;
+    public ChoiceBox choiceBox;
 
     static Stage getSummaryStage(){
         return summaryStage;
@@ -34,6 +32,8 @@ public class ControllerMainWindow {
     private static int howManyChanges = 0;
     private static String extension = "";
     private static String directory = "";
+    private byte []search;
+    private byte [] replacement;
 
     static String getExtension() {
         return extension;
@@ -67,9 +67,28 @@ public class ControllerMainWindow {
         directorySelected.setText(" " + selectedDirectory);
     }
 
+    private void loadAsString() throws UnsupportedEncodingException {
+        search = bytesBefore.getText().getBytes("UTF-8");
+        replacement = bytesAfter.getText().getBytes("UTF-8");
+
+    }
+    private void loadASByte(){
+        String[] partsBefore = bytesBefore.getText().split(" ");
+        String[] partsAfter = bytesAfter.getText().split(" ");
+        search = new byte[partsBefore.length];
+        replacement = new byte[partsAfter.length];
+        for (int i =0; i<partsBefore.length; i++){
+            search[i] = new Byte(partsBefore[i]);
+        }
+        for (int i =0; i<partsAfter.length; i++){
+            replacement[i]= new Byte(partsAfter[i]);
+        }
+
+    }
     public void submitAction() throws IOException {
-        if (selectedDirectory==null || Objects.equals(bytesBefore.getText(), "") || Objects.equals(extensionForSearch.getText(), "")) {
+        if (selectedDirectory==null || (Objects.equals(choiceBox.getValue().toString(), ""))|| Objects.equals(bytesBefore.getText(), "") || Objects.equals(extensionForSearch.getText(), "")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
+            System.out.println(choiceBox.getValue().toString());
             alert.setTitle("Warning Dialog");
             alert.setHeaderText("Nie wypełniłeś wszystkich pól");
             alert.setContentText("Proszę, wypełnij wszystkie pola jeżeli chcesz kontynuować");
@@ -82,10 +101,16 @@ public class ControllerMainWindow {
         extension = extensionForSearch.getText();
         directory = selectedDirectory.toString();
 
+        if (Objects.equals(choiceBox.getValue().toString(), "String")) {
+            loadAsString();
+        }else if (Objects.equals(choiceBox.getValue().toString(), "Byte")){
+            loadASByte();
+        }else {
+            System.out.println("error");
+        }
         for (File o : filter.fileList) {
             byte[] bytes = Files.readAllBytes(new File(o.getAbsolutePath()).toPath());
-            byte[] search = bytesBefore.getText().getBytes("UTF-8");
-            byte[] replacement = bytesAfter.getText().getBytes("UTF-8");
+
             ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
             InputStream ris = new ReplacingInputStream(bis, search, replacement);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -94,6 +119,7 @@ public class ControllerMainWindow {
             bos.close();
             ris.close();
             bis.close();
+            howManyChanges=0;
             howManyChanges = ReplacingInputStream.getHowMany();
             FileWriter fileWriter = new FileWriter(o.getAbsolutePath(), bos.toByteArray());
             fileWriter.write();

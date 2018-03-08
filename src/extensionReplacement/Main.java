@@ -12,9 +12,14 @@ public class Main extends Application {
 
     private static Stage primaryStage;
 
-    static public Stage getPrimaryStage() {
+    static Stage getPrimaryStage() {
         return Main.primaryStage;
     }
+
+    public static void setPrimaryStage(Stage primaryStage) {
+        Main.primaryStage = primaryStage;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource(   "ViewMainWindow.fxml"));
@@ -24,6 +29,7 @@ public class Main extends Application {
         scene.getStylesheets().add(css);
         primaryStage.setScene(scene);
         primaryStage.show();
+        setPrimaryStage(primaryStage);
     }
 
     public static void main(String[] args) {

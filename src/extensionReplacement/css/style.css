@@ -11,24 +11,26 @@
     -fx-font-weight: bold;
     -fx-font-size: 1.1em;
 }
+
 .button:hover {
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
-            #9d4024,
-            #d86e3a,
-            radial-gradient(center 50% 50%, radius 100%, #ea7f4b, #c54e2c);
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+    #9d4024,
+    #d86e3a,
+    radial-gradient(center 50% 50%, radius 100%, #ea7f4b, #c54e2c);
 }
+
 .button:pressed {
     -fx-padding: 10 15 13 15;
-    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+    -fx-background-insets: 2 0 0 0, 2 0 3 0, 2 0 4 0, 2 0 5 0;
 }
+
 .button.Text {
     -fx-fill: white;
-    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+    -fx-effect: dropshadow(gaussian, #a30000, 0, 0, 0, 2);
 
 }
 
-.label{
+.label {
     -fx-font-family: sans-serif;
 }
 
@@ -43,7 +45,8 @@
     -fx-font-size: 18px;
     -fx-text-fill: #331a00;
 }
-.root{
+
+.root {
     -fx-background-color: white;
 }
 
@@ -60,4 +63,33 @@
 
 .tlo {
     -fx-background-color: lightgray;
+}
+
+.choice-box {
+    -fx-background-color: white;
+    -fx-mark-color: orange;
+    -fx-border-color: #9d4024;
+    -fx-border-radius: 5px;
+    -fx-border-width: 3px;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: white;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: lightskyblue;
+}
+
+.choice-box .menu-item > .label {
+    -fx-text-fill: #9d4024;
+}
+
+.choice-box .menu-item:focused > .label {
+    -fx-text-fill: #9d4024;
+    -fx-font-size: 14px;
+}
+
+.choice-box > .label {
+    -fx-text-fill: #9d4024;
 }
