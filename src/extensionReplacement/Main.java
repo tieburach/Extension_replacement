@@ -23,9 +23,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource(   "ViewMainWindow.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Extension replacement");
         Scene scene = new Scene(root, 600, 600);
-        String css = Main.class.getResource("css\\style.css").toExternalForm();
+        String css = Main.class.getResource("css/style.css").toExternalForm();
         scene.getStylesheets().add(css);
         primaryStage.setScene(scene);
         primaryStage.show();

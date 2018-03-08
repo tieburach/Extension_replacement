@@ -57,4 +57,8 @@ class ReplacingInputStream extends FilterInputStream {
     static int getHowMany() {
         return howManyChanges;
     }
+
+    static void setHowMany(int x){
+        howManyChanges = x;
+    }
 }

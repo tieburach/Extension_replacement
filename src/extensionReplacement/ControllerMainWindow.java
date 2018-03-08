@@ -86,7 +86,7 @@ public class ControllerMainWindow {
 
     }
     public void submitAction() throws IOException {
-        if (selectedDirectory==null || (Objects.equals(choiceBox.getValue().toString(), ""))|| Objects.equals(bytesBefore.getText(), "") || Objects.equals(extensionForSearch.getText(), "")) {
+        if (selectedDirectory==null || (Objects.equals(choiceBox.getValue().toString(), ""))|| Objects.equals(bytesBefore.getText(), "")|| Objects.equals(bytesAfter.getText(), "") || Objects.equals(extensionForSearch.getText(), "")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             System.out.println(choiceBox.getValue().toString());
             alert.setTitle("Warning Dialog");
@@ -108,6 +108,7 @@ public class ControllerMainWindow {
         }else {
             System.out.println("error");
         }
+            ReplacingInputStream.setHowMany(0);
         for (File o : filter.fileList) {
             byte[] bytes = Files.readAllBytes(new File(o.getAbsolutePath()).toPath());
 
@@ -119,11 +120,14 @@ public class ControllerMainWindow {
             bos.close();
             ris.close();
             bis.close();
-            howManyChanges=0;
-            howManyChanges = ReplacingInputStream.getHowMany();
+
+
             FileWriter fileWriter = new FileWriter(o.getAbsolutePath(), bos.toByteArray());
             fileWriter.write();
         }
+        howManyChanges = ReplacingInputStream.getHowMany();
+
+
         clearTextFields();
         summaryStage = new Stage();
         SummaryWindow summaryWindow = new SummaryWindow();
